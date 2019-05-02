@@ -13,11 +13,14 @@ class MemoryProductStorage implements  ProductStorage {
 	
     @Override
     void update(int id, Product p) {
-		
-		Integer productIndex = products.findIndexOf { it.id == id }
-		p.id = id;
-		products.set(productIndex, p)
-	
+		for(e in productlist){
+			if(e.id == id){
+				e.name = p.name
+				e.description = p.description
+				e.price = p.price
+				e.idealTemperature = p.idealTemperature
+			}
+		}
     }
 
     @Override
