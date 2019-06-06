@@ -1,6 +1,6 @@
 package gl51.project.store
 
-String erface ProductStorage {
+String interface ProductStorage {
 	
 	/**
      * creates an new product in the store and return id
