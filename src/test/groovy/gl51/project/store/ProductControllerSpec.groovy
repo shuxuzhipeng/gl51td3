@@ -40,7 +40,7 @@ class ProductControllerSpec extends Specification {
         Product newProduct = new Product(name: name, description: description, price: price, idealTemperature: idealTemperature)
 
         when:
-        int id = client.toBlocking().retrieve(HttpRequest.POST('/products', newProduct))
+        int id = Integer.parseInt(client.toBlocking().retrieve(HttpRequest.POST('/products', newProduct)))
         Product findProduct = client.toBlocking().retrieve(HttpRequest.GET('/products/'+id), Argument.of(Product).type)
 
         then:
@@ -58,7 +58,7 @@ class ProductControllerSpec extends Specification {
         setup:
         Product oldProduct = new Product(name: name, description: description, price: price, idealTemperature: idealTemperature)
         Product newProduct = new Product(name: name1, description: description1, price: price1, idealTemperature: idealTemperature1)
-        int id = client.toBlocking().retrieve(HttpRequest.POST('/products', oldProduct))
+        int id = Integer.parseInt(client.toBlocking().retrieve(HttpRequest.POST('/products', oldProduct)))
 
         when:
         client.toBlocking().retrieve(HttpRequest.PUT('/products/' + id, newProduct), Argument.of(HttpStatus).type)
@@ -78,7 +78,7 @@ class ProductControllerSpec extends Specification {
     void "delete one product"() {
         setup:
         Product newProduct = new Product(name: name, description: description, price: price, idealTemperature: idealTemperature)
-        int id = client.toBlocking().retrieve(HttpRequest.POST('/products', newProduct))
+        int id = Integer.parseInt(client.toBlocking().retrieve(HttpRequest.POST('/products', newProduct)))
 
         when:
         client.toBlocking().retrieve(HttpRequest.DELETE('/products/'+ id))
