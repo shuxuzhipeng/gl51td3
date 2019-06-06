@@ -2,6 +2,7 @@ package gl51.project.store
 
 import io.micronaut.runtime.server.EmbeddedServer
 import io.micronaut.http.client.RxHttpClient
+import io.micronaut.http.codec.CodecException
 import io.micronaut.http.client.exceptions.HttpClientResponseException
 import io.micronaut.context.ApplicationContext
 import io.micronaut.core.type.Argument
@@ -11,6 +12,7 @@ import io.micronaut.http.HttpStatus
 import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification
+
 
 
 class ProductControllerSpec extends Specification {
