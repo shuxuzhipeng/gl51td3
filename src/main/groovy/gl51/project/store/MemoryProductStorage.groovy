@@ -1,18 +1,17 @@
 package gl51.project.store
 class MemoryProductStorage implements  ProductStorage {
 	private List<Product> productlist = []
-	private int id_total = 1
 	@Override
-    int save(Product p) {
-		p.id = id_total
-        productlist.add(p)
-		id_total += 1
-    	return p.id
+    String save(Product p) {
+      if(!p.id)
+        p.id = UUID.randomUUID().toString()
+        this.productlist.add(p)
+        return p.id
     }
  
 	
     @Override
-    void update(int id, Product p) {
+    void update(String id, Product p) {
 		for(e in productlist){
 			if(e.id == id){
 				e.name = p.name
@@ -24,7 +23,7 @@ class MemoryProductStorage implements  ProductStorage {
     }
 
     @Override
-    Product getByID(int id) {
+    Product getByID(String id) {
 		def product = productlist.find { it.id == id }
         if(product == null)
         {
@@ -34,7 +33,7 @@ class MemoryProductStorage implements  ProductStorage {
     }
 
     @Override
-    void delete(int id) {
+    void delete(String id) {
 		def product = getByID(id)
 		if (product != null){
 			productlist.remove(product)
